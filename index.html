@@ -14,8 +14,15 @@
         text-align: center;
     }
     header {
-        background: linear-gradient(90deg, #0073ff, #00eaff);
         padding: 20px 0;
+    }
+    header img {
+        width: 160px;
+        margin-bottom: 10px;
+    }
+    header .title {
+        background: linear-gradient(90deg, #0073ff, #00eaff);
+        padding: 15px 0;
         font-size: 1.8em;
         font-weight: bold;
         letter-spacing: 2px;
@@ -77,41 +84,61 @@
         padding: 15px;
         font-size: 0.9em;
         color: #aaa;
+        line-height: 1.6;
+    }
+    footer a {
+        color: #00eaff;
+        text-decoration: none;
     }
 </style>
 </head>
 <body>
 
-<header>🔥 FITNESS HERO 課程收費方案 🔥</header>
+<header>
+    <img src="YOUR_LOGO_URL_HERE" alt="Fitness Hero Logo">
+    <div class="title">FITNESS HERO 課程收費方案</div>
+</header>
 
 <div class="tabs">
     <div class="tab active" onclick="switchTab('experience')">新客體驗方案</div>
     <div class="tab" onclick="switchTab('standard')">標準課程票券</div>
 </div>
 
+<!-- 新客體驗方案 -->
 <div id="experience" class="content active">
+
     <div class="card">
         <h2>3堂體驗套票</h2>
         <div class="price">$298</div>
         <p>有效期：30天</p>
         <p>限首次體驗客人</p>
-        <p>體驗結束當日購買任一套票可再折$100！</p>
+        <p>體驗當日購買套票再折$100！</p>
         <button class="btn">立即體驗</button>
     </div>
-</div>
 
-<div id="standard" class="content">
     <div class="card">
         <h2>單次體驗課</h2>
         <div class="price">$128 / 1堂</div>
-        <p>自由彈性，適合臨時運動需求</p>
+        <p>入門首選，適合第一次來運動</p>
+        <button class="btn">預約課程</button>
+    </div>
+
+</div>
+
+<!-- 標準課程票券 -->
+<div id="standard" class="content">
+
+    <div class="card">
+        <h2>單次課堂</h2>
+        <div class="price">$180 / 1堂</div>
+        <p>彈性時間自由選課</p>
         <button class="btn">預約課程</button>
     </div>
 
     <div class="card">
         <h2>5堂運動套票</h2>
         <div class="price">$750 / 5堂</div>
-        <p>平均每堂 $150<br>有效期：45天內</p>
+        <p>平均每堂 $150<br>有效期：45天</p>
         <button class="btn">購買套票</button>
     </div>
 
@@ -121,10 +148,14 @@
         <p>平均每堂 $120<br>有效期：3個月內</p>
         <button class="btn">購買套票</button>
     </div>
+
 </div>
 
 <footer>
-    @fitnesshero_quby | Fitness Hero 健身基地
+    FITNESS HERO 健身中心<br>
+    地址：荃灣德士古道寶業工業大廈 A 座 11 樓 4B 室<br>
+    <a href="[maps.app.goo.gl](https://maps.app.goo.gl/y3eLpGX1YGUdiYEt8?g_st=ic)" target="_blank">查看 Google 地圖</a><br>
+    IG：@fitnesshero_quby
 </footer>
 
 <script>
