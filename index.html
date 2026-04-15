@@ -1,170 +1,236 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitness Hero 課程價目表</title>
-<style>
-    body {
-        font-family: "Microsoft JhengHei", sans-serif;
-        background: #0a0f1f;
-        color: #fff;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-    header {
-        padding: 20px 0;
-    }
-    header img {
-        width: 160px;
-        margin-bottom: 10px;
-    }
-    header .title {
-        background: linear-gradient(90deg, #0073ff, #00eaff);
-        padding: 15px 0;
-        font-size: 1.8em;
-        font-weight: bold;
-        letter-spacing: 2px;
-    }
-    .tabs {
-        display: flex;
-        justify-content: center;
-        background: #111;
-        padding: 10px 0;
-    }
-    .tab {
-        padding: 12px 24px;
-        margin: 0 5px;
-        cursor: pointer;
-        color: #00eaff;
-        border-bottom: 3px solid transparent;
-        transition: 0.3s;
-    }
-    .tab.active {
-        border-bottom: 3px solid #00eaff;
-        font-weight: bold;
-    }
-    .content {
-        display: none;
-        padding: 30px 20px;
-    }
-    .content.active {
-        display: block;
-    }
-    .card {
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid #00eaff;
-        border-radius: 10px;
-        display: inline-block;
-        width: 300px;
-        margin: 15px;
-        padding: 20px;
-    }
-    .price {
-        font-size: 2em;
-        color: #00eaff;
-        margin: 10px 0;
-    }
-    .btn {
-        background: #00eaff;
-        color: #000;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: 0.2s;
-    }
-    .btn:hover {
-        background: #00b0ff;
-    }
-    footer {
-        margin-top: 40px;
-        padding: 15px;
-        font-size: 0.9em;
-        color: #aaa;
-        line-height: 1.6;
-    }
-    footer a {
-        color: #00eaff;
-        text-decoration: none;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITNESS HERO | 課程收費方案</title>
+    <style>
+        :root {
+            --primary-blue: #00d2ff;
+            --dark-bg: #0a0e14;
+            --card-bg: #16212e;
+            --text-white: #ffffff;
+            --accent-glow: rgba(0, 210, 255, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Microsoft JhengHei, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-blue);
+            border-radius: 20px;
+            box-shadow: 0 0 20px var(--accent-glow);
+            overflow: hidden;
+        }
+
+        /* Header Area */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(180deg, rgba(0,210,255,0.1) 0%, rgba(22,33,46,1) 100%);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 2px;
+            color: var(--primary-blue);
+            text-shadow: 2px 2px 10px var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            background: #0d151f;
+            border-bottom: 1px solid var(--primary-blue);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-blue);
+            background: rgba(0, 210, 255, 0.1);
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        /* Content Area */
+        .content {
+            padding: 30px 20px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Price Cards */
+        .price-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .highlight-card {
+            border: 2px solid var(--primary-blue);
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        .price-tag {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .info-row {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .promo-badge {
+            background: #ff4757;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .bonus-text {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #ffd700;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .ig-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <img src="YOUR_LOGO_URL_HERE" alt="Fitness Hero Logo">
-    <div class="title">FITNESS HERO 課程收費方案</div>
-</header>
+<div class="container">
+    <header>
+        <div class="logo">FITNESS HERO</div>
+        <div class="subtitle">課程收費方案 (適用任何課程)</div>
+    </header>
 
-<div class="tabs">
-    <div class="tab active" onclick="switchTab('experience')">新客體驗方案</div>
-    <div class="tab" onclick="switchTab('standard')">標準課程票券</div>
+    <nav class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'newbie')">新客限定</button>
+        <button class="tab-btn" onclick="openTab(event, 'standard')">標準套票</button>
+    </nav>
+
+    <div id="newbie" class="content active">
+        <div class="price-card highlight-card">
+            <div class="promo-badge">限首次體驗客人</div>
+            <h3>3堂體驗套票</h3>
+            <div class="price-tag">$298</div>
+            <div class="info-row">有效期限：30日</div>
+            <div class="bonus-text">
+                🔥 如體驗結束即日購買任何套票，即減 $100!!
+            </div>
+        </div>
+    </div>
+
+    <div id="standard" class="content">
+        <div class="price-card">
+            <h3>單次體驗課</h3>
+            <div class="price-tag">$128 <span style="font-size: 1rem;">/ 1堂</span></div>
+        </div>
+
+        <div class="price-card">
+            <h3>五堂運動套票</h3>
+            <div class="price-tag">$750 <span style="font-size: 1rem;">/ 5堂</span></div>
+            <div class="info-row">平均每堂：$150</div>
+            <div class="info-row">有效期限：45日內</div>
+        </div>
+
+        <div class="price-card highlight-card">
+            <div class="promo-badge">最划算推薦</div>
+            <h3>10堂運動套票</h3>
+            <div class="price-tag">$1200 <span style="font-size: 1rem;">/ 10堂</span></div>
+            <div class="info-row">平均每堂：$120</div>
+            <div class="info-row">有效期限：3個月內</div>
+        </div>
+    </div>
+
+    <footer>
+        Follow us on Instagram: <a href="https://instagram.com/fitnesshero_quby" class="ig-link">@fitnesshero_quby</a>
+    </footer>
 </div>
-
-<!-- 新客體驗方案 -->
-<div id="experience" class="content active">
-
-    <div class="card">
-        <h2>3堂體驗套票</h2>
-        <div class="price">$298</div>
-        <p>有效期：30天</p>
-        <p>限首次體驗客人</p>
-        <p>體驗當日購買套票再折$100！</p>
-        <button class="btn">立即體驗</button>
-    </div>
-
-    <div class="card">
-        <h2>單次體驗課</h2>
-        <div class="price">$128 / 1堂</div>
-        <p>入門首選，適合第一次來運動</p>
-        <button class="btn">預約課程</button>
-    </div>
-
-</div>
-
-<!-- 標準課程票券 -->
-<div id="standard" class="content">
-
-    <div class="card">
-        <h2>單次課堂</h2>
-        <div class="price">$180 / 1堂</div>
-        <p>彈性時間自由選課</p>
-        <button class="btn">預約課程</button>
-    </div>
-
-    <div class="card">
-        <h2>5堂運動套票</h2>
-        <div class="price">$750 / 5堂</div>
-        <p>平均每堂 $150<br>有效期：45天</p>
-        <button class="btn">購買套票</button>
-    </div>
-
-    <div class="card">
-        <h2>10堂運動套票</h2>
-        <div class="price">$1200 / 10堂</div>
-        <p>平均每堂 $120<br>有效期：3個月內</p>
-        <button class="btn">購買套票</button>
-    </div>
-
-</div>
-
-<footer>
-    FITNESS HERO 健身中心<br>
-    地址：荃灣德士古道寶業工業大廈 A 座 11 樓 4B 室<br>
-    <a href="[maps.app.goo.gl](https://maps.app.goo.gl/y3eLpGX1YGUdiYEt8?g_st=ic)" target="_blank">查看 Google 地圖</a><br>
-    IG：@fitnesshero_quby
-</footer>
 
 <script>
-function switchTab(tabId) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-    document.querySelector('.tab[onclick="switchTab(\'' + tabId + '\')"]').classList.add('active');
-    document.getElementById(tabId).classList.add('active');
-}
+    function openTab(evt, tabName) {
+        var i, content, tabLinks;
+        content = document.getElementsByClassName("content");
+        for (i = 0; i < content.length; i++) {
+            content[i].classList.remove("active");
+        }
+        tabLinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tabLinks.length; i++) {
+            tabLinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
 </script>
 
 </body>
