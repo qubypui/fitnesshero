@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Hero 課程價目表</title>
+<style>
+    body {
+        font-family: "Microsoft JhengHei", sans-serif;
+        background: #0a0f1f;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    header {
+        background: linear-gradient(90deg, #0073ff, #00eaff);
+        padding: 20px 0;
+        font-size: 1.8em;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+    .tabs {
+        display: flex;
+        justify-content: center;
+        background: #111;
+        padding: 10px 0;
+    }
+    .tab {
+        padding: 12px 24px;
+        margin: 0 5px;
+        cursor: pointer;
+        color: #00eaff;
+        border-bottom: 3px solid transparent;
+        transition: 0.3s;
+    }
+    .tab.active {
+        border-bottom: 3px solid #00eaff;
+        font-weight: bold;
+    }
+    .content {
+        display: none;
+        padding: 30px 20px;
+    }
+    .content.active {
+        display: block;
+    }
+    .card {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid #00eaff;
+        border-radius: 10px;
+        display: inline-block;
+        width: 300px;
+        margin: 15px;
+        padding: 20px;
+    }
+    .price {
+        font-size: 2em;
+        color: #00eaff;
+        margin: 10px 0;
+    }
+    .btn {
+        background: #00eaff;
+        color: #000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.2s;
+    }
+    .btn:hover {
+        background: #00b0ff;
+    }
+    footer {
+        margin-top: 40px;
+        padding: 15px;
+        font-size: 0.9em;
+        color: #aaa;
+    }
+</style>
+</head>
+<body>
+
+<header>🔥 FITNESS HERO 課程收費方案 🔥</header>
+
+<div class="tabs">
+    <div class="tab active" onclick="switchTab('experience')">新客體驗方案</div>
+    <div class="tab" onclick="switchTab('standard')">標準課程票券</div>
+</div>
+
+<div id="experience" class="content active">
+    <div class="card">
+        <h2>3堂體驗套票</h2>
+        <div class="price">$298</div>
+        <p>有效期：30天</p>
+        <p>限首次體驗客人</p>
+        <p>體驗結束當日購買任一套票可再折$100！</p>
+        <button class="btn">立即體驗</button>
+    </div>
+</div>
+
+<div id="standard" class="content">
+    <div class="card">
+        <h2>單次體驗課</h2>
+        <div class="price">$128 / 1堂</div>
+        <p>自由彈性，適合臨時運動需求</p>
+        <button class="btn">預約課程</button>
+    </div>
+
+    <div class="card">
+        <h2>5堂運動套票</h2>
+        <div class="price">$750 / 5堂</div>
+        <p>平均每堂 $150<br>有效期：45天內</p>
+        <button class="btn">購買套票</button>
+    </div>
+
+    <div class="card">
+        <h2>10堂運動套票</h2>
+        <div class="price">$1200 / 10堂</div>
+        <p>平均每堂 $120<br>有效期：3個月內</p>
+        <button class="btn">購買套票</button>
+    </div>
+</div>
+
+<footer>
+    @fitnesshero_quby | Fitness Hero 健身基地
+</footer>
+
+<script>
+function switchTab(tabId) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.querySelector('.tab[onclick="switchTab(\'' + tabId + '\')"]').classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+}
+</script>
+
+</body>
+</html>
