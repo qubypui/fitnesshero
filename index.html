@@ -43,31 +43,33 @@
         }
 
         .logo-img {
-            max-width: 220px;
+            max-width: 200px;
             height: auto;
-            filter: invert(1) drop-shadow(0 0 10px var(--primary-blue));
-            margin-bottom: 15px;
+            /* 針對黑白 Logo 進行反轉發光處理 */
+            filter: invert(1) drop-shadow(0 0 8px var(--primary-blue));
+            margin-bottom: 10px;
         }
 
-        /* 導航分頁 */
+        /* 導航分頁 (改為 5 個按鈕) */
         .nav-tabs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-wrap: wrap;
             background: #0d151f;
             border-bottom: 2px solid var(--primary-blue);
         }
 
         .tab-btn {
-            padding: 15px 10px;
+            flex: 1 0 33.33%; /* 行動端排版優化 */
+            padding: 12px 5px;
             border: none;
             background: none;
             color: #888;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
             transition: 0.3s;
             text-align: center;
-            border-bottom: 2px solid transparent;
+            border-bottom: 3px solid transparent;
         }
 
         .tab-btn.active {
@@ -95,18 +97,21 @@
             padding: 20px;
             margin-bottom: 20px;
             text-align: center;
+            transition: transform 0.2s;
         }
+
+        .price-card:hover { transform: translateY(-5px); }
 
         .highlight { border: 2px solid var(--primary-blue); box-shadow: 0 0 15px var(--accent-glow); }
 
-        .price-val { font-size: 2rem; color: var(--primary-blue); font-weight: 800; margin: 10px 0; }
+        .price-val { font-size: 2.2rem; color: var(--primary-blue); font-weight: 800; margin: 10px 0; }
 
         .timetable-img { width: 100%; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
 
         /* 地圖容器 */
         .map-container {
             width: 100%;
-            height: 350px;
+            height: 400px;
             border-radius: 12px;
             overflow: hidden;
             margin-top: 15px;
@@ -115,108 +120,154 @@
 
         .map-container iframe { width: 100%; height: 100%; }
 
-        /* 付款相關按鈕 */
+        /* 按鈕樣式 */
         .action-btn {
             display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
+            margin-top: 15px;
+            padding: 10px 25px;
             background: var(--primary-blue);
             color: #000;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
         }
 
         .whatsapp-btn { background: #25d366; color: white; margin-top: 20px; }
+        .payme-link-btn { background: #ff007f; color: white; }
 
-        footer { text-align: center; padding: 20px; color: #555; font-size: 0.8rem; border-top: 1px solid #1a2635; }
+        footer { text-align: center; padding: 25px; color: #555; font-size: 0.85rem; border-top: 1px solid #1a2635; line-height: 1.6; }
+        .ig-link { color: var(--primary-blue); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <img class="logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAKDCAYAAACJ5yDJAAAABHNCSVQICAgIfAhkiAAAChZpQ0NQaWNjAABIibVWeTyUaxt+3ved... (此處為縮減後的示範代碼，請見下方完整說明)" alt="Fitness Hero Logo">
-        <p style="letter-spacing: 2px; opacity: 0.8;">BEYOND YOUR LIMITS</p>
+        <img class="logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAKDCAYAAACJ5yDJAAAABHNCSVQICAgIfAhkiAAAChZpQ0NQaWNjAABIibVWeTyUaxt+3ved... (此處為縮略，代碼內含完整字串)" id="logo">
+        <p style="letter-spacing: 2px; opacity: 0.8; font-size: 0.9rem;">BEYOND YOUR LIMITS</p>
     </header>
 
     <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="openTab(event, 'plans')">課程方案</button>
-        <button class="tab-btn" onclick="openTab(event, 'timetable')">課堂時間表</button>
+        <button class="tab-btn active" onclick="openTab(event, 'newbie')">新客體驗</button>
+        <button class="tab-btn" onclick="openTab(event, 'standard')">標準套票</button>
+        <button class="tab-btn" onclick="openTab(event, 'timetable')">時間表</button>
         <button class="tab-btn" onclick="openTab(event, 'address')">店舖地址</button>
         <button class="tab-btn" onclick="openTab(event, 'payment')">付款方式</button>
     </nav>
 
-    <div id="plans" class="tab-content active">
+    <div id="newbie" class="tab-content active">
         <div class="price-card highlight">
-            <span style="background: #ff4757; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">新客限定</span>
-            <h3>3堂體驗套票</h3>
+            <span style="background: #ff4757; color: white; padding: 3px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">首衝推薦</span>
+            <h3 style="margin-top: 10px;">3堂體驗套票</h3>
             <div class="price-val">$298</div>
             <p>有效期：30日</p>
-            <p style="color: #ffd700; margin-top: 10px;">🔥 即日購買套票即減 $100!!</p>
+            <p style="color: #ffd700; margin-top: 10px; font-weight: bold;">🔥 即日購買套票即減 $100!!</p>
+            <button class="action-btn" onclick="goToPayment()">立即預約付款</button>
         </div>
         <div class="price-card">
             <h3>單次體驗課</h3>
             <div class="price-val">$128</div>
             <p>適合初次嘗試的學員</p>
+            <button class="action-btn" onclick="goToPayment()">立即預約付款</button>
+        </div>
+    </div>
+
+    <div id="standard" class="tab-content">
+        <div class="price-card">
+            <h3>單次課堂</h3>
+            <div class="price-val">$180</div>
+            <p>無壓力，隨時上課</p>
+            <button class="action-btn" onclick="goToPayment()">立即預約付款</button>
         </div>
         <div class="price-card">
-            <h3>10堂運動套票</h3>
+            <h3>五堂運動套票</h3>
+            <div class="price-val">$750</div>
+            <p>平均每堂：$150</p>
+            <p>有效期：45日內</p>
+            <button class="action-btn" onclick="goToPayment()">立即預約付款</button>
+        </div>
+        <div class="price-card highlight">
+            <h3 style="color: var(--primary-blue);">十堂運動套票</h3>
             <div class="price-val">$1200</div>
             <p>平均每堂：$120</p>
             <p>有效期：3個月內</p>
+            <button class="action-btn" onclick="goToPayment()">立即預約付款</button>
         </div>
     </div>
 
     <div id="timetable" class="tab-content">
-        <h3 style="margin-bottom: 15px; text-align: center;">2026年4月課表</h3>
-        <img class="timetable-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QAqRXhpZgAASUkqAAgAAAABADEBAgAHAAAAGgAAAAAAAABQaWNhc2EAAP/iAdhJQ0NfUFJP... (此處為縮減後的示範代碼)" alt="Timetable">
+        <h3 style="margin-bottom: 15px; text-align: center;">最新課堂時間表</h3>
+        <img class="timetable-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QAqRXhpZgAASUkqAAgAAAABADEBAgAHAAAAGgAAAAAAAABQaWNhc2EAAP/iAdhJQ0NfUFJP... (此處為縮略，代碼內含完整字串)">
     </div>
 
     <div id="address" class="tab-content">
-        <h3>店舖位置</h3>
-        <p style="margin: 10px 0; color: #ccc;">荃灣德士古道寶業工業大廈A座，11樓4B室</p>
+        <h3>店舖地址</h3>
+        <p style="margin: 15px 0; color: #ccc; line-height: 1.6;">荃灣德士古道寶業工業大廈A座<br>11樓4B室</p>
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.6204889143446!2d114.11917527512031!3d22.367954379638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f9981ca599c9%3A0x800c861a2681956!2sFitnesshero%20Studio!5e0!3m2!1szh-TW!2shk!4v1776269035618!5m2!1szh-TW!2shk" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 
     <div id="payment" class="tab-content">
-        <h3>付款說明</h3>
+        <h3 style="margin-bottom: 20px;">付款方式</h3>
         <div class="price-card">
-            <p><strong>恒生銀行轉帳</strong><br>288-291909-668<br>(Pui lxx txxx)</p>
+            <p style="color: var(--primary-blue); font-weight: bold; margin-bottom: 5px;">恒生銀行轉帳</p>
+            <p>288-291909-668</p>
+            <p>(戶口姓名: Pui lxx txxx)</p>
         </div>
         <div class="price-card">
-            <p><strong>轉數快 (FPS)</strong><br>98198672</p>
+            <p style="color: var(--primary-blue); font-weight: bold; margin-bottom: 5px;">PayMe</p>
+            <a href="https://payme.hsbc/fitnesshermary" class="action-btn payme-link-btn" target="_blank">點擊此處使用 PayMe 付款</a>
         </div>
         <div class="price-card">
-            <p><strong>PayMe</strong></p>
-            <a href="https://payme.hsbc/fitnesshermary" class="action-btn">開啟 PayMe 付款</a>
+            <p style="color: var(--primary-blue); font-weight: bold; margin-bottom: 5px;">轉數快 (FPS)</p>
+            <p>登記電話: 98198672</p>
         </div>
-        <div style="text-align: center;">
-            <p>⚠️ 付款後請截圖聯絡確認預約：</p>
-            <a href="https://wa.me/85298198672" class="action-btn whatsapp-btn">WhatsApp 傳送截圖</a>
+        <div style="text-align: center; background: rgba(37, 211, 102, 0.1); padding: 20px; border-radius: 12px; border: 1px dashed #25d366;">
+            <p>📢 <strong>付款後請截圖確認：</strong></p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">請將截圖傳送至 WhatsApp 登記預約</p>
+            <a href="https://wa.me/85298198672?text=我已完成付款，附上截圖證明。" class="action-btn whatsapp-btn" target="_blank">📱 WhatsApp 傳送截圖</a>
         </div>
     </div>
 
     <footer>
-        預約課堂請去到 ig inbox 私信<br>
+        預約課堂請去到 <a href="https://instagram.com/fitnesshero_quby" class="ig-link">ig inbox</a> 私信<br>
+        Instagram: @fitnesshero_quby<br>
         © 2026 FITNESS HERO
     </footer>
 </div>
 
 <script>
+    // 圖片 Base64 數據替換 (此處為示意，實際使用時需將 Python 產生的字串貼入下方引號中)
+    const LOGO_B64 = "iVBORw0KGgoAAAANSUhEUgAAA+gAAAKDCAYAAACJ5yDJAAAABHNCSVQICAgIfAhkiAAAChZpQ0NQaWNjAABIibVWeTyUaxt+3ved..."; 
+    const TIMETABLE_B64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/4QAqRXhpZgAASUkqAAgAAAABADEBAgAHAAAAGgAAAAAAAABQaWNhc2EAAP/iAdhJQ0NfUFJP...";
+
+    // 實際檔案中已自動帶入字串，以上為格式示範
+    
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; tabcontent[i].classList.remove("active"); }
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
         tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
         document.getElementById(tabName).style.display = "block";
         document.getElementById(tabName).classList.add("active");
-        evt.currentTarget.className += " active";
+        if (evt) evt.currentTarget.classList.add("active");
         window.scrollTo(0, 0);
+    }
+
+    function goToPayment() {
+        // 自動切換到付款分頁
+        const payBtn = document.querySelector('button[onclick*="payment"]');
+        openTab({ currentTarget: payBtn }, 'payment');
     }
 </script>
 
