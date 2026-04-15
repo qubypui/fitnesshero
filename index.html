@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FITNESS HERO | 課程收費方案</title>
+    <title>FITNESS HERO | 課程收費與付款方法</title>
     <style>
         :root {
             --primary-blue: #00d2ff;
             --dark-bg: #0a0e14;
             --card-bg: #16212e;
             --text-white: #ffffff;
-            --accent-glow: rgba(0, 210, 255, 0.3);
+            --accent-glow: rgba(0, 210, 255, 0.4);
+            --promo-glow: rgba(255, 215, 0, 0.3);
         }
 
         * {
@@ -36,25 +37,42 @@
             background: var(--card-bg);
             border: 2px solid var(--primary-blue);
             border-radius: 20px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 0 25px var(--accent-glow);
             overflow: hidden;
         }
 
-        /* Header Area */
+        /* 頁眉 (LOGO 與標題) */
         header {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             background: linear-gradient(180deg, rgba(0,210,255,0.1) 0%, rgba(22,33,46,1) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .logo {
+        .logo-container {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px var(--primary-blue)); /* LOGO 發光效果 */
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            /* 將 LOGO 顏色反轉並賦予發光色，與主題一致 */
+            filter: invert(1) drop-shadow(0 0 10px var(--primary-blue));
+        }
+
+        .logo-text {
             font-size: 2.5rem;
             font-weight: 900;
             font-style: italic;
             letter-spacing: 2px;
             color: var(--primary-blue);
             text-shadow: 2px 2px 10px var(--primary-blue);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .subtitle {
@@ -62,34 +80,35 @@
             opacity: 0.9;
         }
 
-        /* Tab Navigation */
+        /* 分頁導航 */
         .tabs {
             display: flex;
             background: #0d151f;
-            border-bottom: 1px solid var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
         }
 
         .tab-btn {
             flex: 1;
-            padding: 15px;
+            padding: 20px;
             border: none;
             background: none;
             color: #888;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             transition: 0.3s;
+            text-align: center;
         }
 
         .tab-btn.active {
             color: var(--primary-blue);
             background: rgba(0, 210, 255, 0.1);
-            border-bottom: 3px solid var(--primary-blue);
+            border-bottom: 4px solid var(--primary-blue);
         }
 
-        /* Content Area */
+        /* 內容區域 */
         .content {
-            padding: 30px 20px;
+            padding: 40px 20px;
             display: none;
             animation: fadeIn 0.5s ease;
         }
@@ -99,62 +118,182 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Price Cards */
+        /* 價格卡片樣式 */
         .price-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(0, 210, 255, 0.2);
             border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
             text-align: center;
             position: relative;
+            transition: 0.3s;
+        }
+
+        .price-card:hover {
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
         .highlight-card {
             border: 2px solid var(--primary-blue);
             background: rgba(0, 210, 255, 0.05);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .promo-glow-card {
+            box-shadow: 0 0 20px var(--promo-glow);
         }
 
         .price-tag {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: var(--primary-blue);
             font-weight: bold;
             margin: 10px 0;
+            text-shadow: 2px 2px 8px var(--primary-blue);
         }
 
         .info-row {
-            margin: 5px 0;
-            font-size: 0.9rem;
+            margin: 8px 0;
+            font-size: 0.95rem;
             color: #ccc;
         }
 
         .promo-badge {
             background: #ff4757;
             color: white;
-            padding: 5px 15px;
+            padding: 6px 18px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .bonus-text {
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 10px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #ffd700;
         }
 
+        /* 前往付款按鈕 */
+        .pay-btn {
+            background: var(--primary-blue);
+            color: var(--dark-bg);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .pay-btn:hover {
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        /* 付款方法卡片 */
+        .payment-method-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .payment-info-title {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .payment-detail {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 8px;
+        }
+
+        /* 地圖區域 */
+        .map-section {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .address-text {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--primary-blue);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 外部連結按鈕 */
+        .external-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .external-btn:hover {
+            background: rgba(0, 210, 255, 0.1);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .payme-btn {
+            border: 2px solid #ff007f;
+            color: #ff007f;
+        }
+        
+        .payme-btn:hover {
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+        }
+
+        .whatsapp-btn {
+            border: 2px solid #25d366;
+            color: #25d366;
+        }
+
+        .whatsapp-btn:hover {
+            box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
+        }
+
+        /* 頁腳 */
         footer {
             text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
+            padding: 30px;
+            font-size: 0.9rem;
             color: #666;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
@@ -162,6 +301,11 @@
         .ig-link {
             color: var(--primary-blue);
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        .ig-link:hover {
+            text-shadow: 0 0 5px var(--primary-blue);
         }
     </style>
 </head>
@@ -169,17 +313,20 @@
 
 <div class="container">
     <header>
-        <div class="logo">FITNESS HERO</div>
+        <div class="logo-container">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJgAAABWCAYAAADG47XvAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPgFj334iZzQmhqTAQZaZmEEIQKiggoRQQpMqoIAmIByVDpSAD54EIKKAdA4gI48CA2B12UF90qJ43u95+685S3x3f/7v38z8vL93+d56AAmYcE0l2iALAnfL6IJE7GxsTkPz8EGGGAARHAgU7G+G4K8Xp0A5wA0gS00+B6uT6s/W4W8D/7v8j/C0vL6wK2XwZ08uM/M+78X+B8G/C08/4EwG/7+0O7wOfu94N6+z4H8//Yf8E4C0O/r7+v5E8WwX5v//c3/6v8D+B6C8u8fO4O/m7W+XqS/y+O9+Wvj4e8+7f8N9e37+z375P/D/8//P8+8D889/54+h88PwE4AOfMv+M8/739Of8897P+H4EOfMv/M8/738Pf/P+Of8f8O9e37+37+P8/8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/5P8P8D+8/8/8f8v9v/+/1m3j6UAAA5bSURBVHja7VtbcltHFPzEAGY6Nf8t/6o5wK4m7v8YVl1V5p4yGz4YvGZ15w+u5m5i2+oF8jY5t2fXwX38BwGf8C8EvMDfCLgEPw4pYIqAgCkCAsYICJgiIGCKgIApAgKmCAiYIiBgioCAKQK+FfCxY/6E5Y16rO4W7v57PvbvO4XN+z65f/9X489h2/F8L9N7m/5t2+P5vun5/f//nSjMv+S16jB4vXp99uW65O/W70f8U9v6u8R/tS0vYf//+SjS83Uf8q8n43N/p4T/1O/+85u572e+N++b387/f/43v5vftu3v5rf8m85496V4v/XzVf1fHwYpLfflW9p/pW+/4vX4+YivVp3b15MOfVl//fWvWn+XvH/N90v+XvP/59XzL7j9U9uWv6Z6D5X25pvafr907Gf86+r45f0pLp/fR/1fP/O/O3UOfuYl7Gf8vPrW9vUnX9f//H3jI2z/PPHmX+f598wF6qMvP3fE93fK+zVpE8X93zU+/tGZ/2u99L7H603//t7/6Mv+XfH+DftXh8H7X5P2yff6L1/bXv+G6vlv/6vP+N/f++r/8/t7/9bW/U55/7t4PzVf39H3m46Ww89Yf3/iS78Of9/nL19f8n//h75/zX95W+r5D5Wv//5/Hwb//0j6/0X9/2/9/p9//O/4Xv+L5X018fOfiT6Hj52zTj/C4D89+V2/Ww7VvN/yOfV/Gf5G/b/5f+z1yU9E/97693t460Ond58/P+v8XFvX/fQx/zP/97V8X5/66Yf/4XqI3r/l6w9/+3fG6Xj+r6b/p/X5e8n7N3y/r/k/9f0L4v/E+/P6v45Lw33/qf0+9//L93/9I5/W5/5pE/8Nf9/v6X5/8r4fG/+B6vj482t668Wfv5Y3P70b/7+m968M/w29P6/+X4Z/p/f+u5j/4m+V9W9ofX/5t+Pj//6m/+fT+XfN+f9pff/8Mfh44919mF8L9/u2v0e/+K//921/f+Vf2f9f5fXn//9+6V/+vj5uX4/48+f2/eP/v+K+t/597L9p/4/X7//2/p3X/4/p/fO+X3n/75v/8L7+7L/4+m//23/b/jGv/7f9/ZXXj4/3X25fGv79uLw9O3H9Oby+pffn//Ouv/mPf29+/T/m9//i6//7f7/+P7/X/+K+X5+/6v/+Ouvr4f/t64n/F68/7v9XpP/v6/f/uv4+f/v6p3D//8/rYftuX/3/4r7Xb879vW6f/v/mPOfXF/5X//+ePOf7p7T/X7R/Tvr///Lp9+K+/p9/6w//b39v//Xp+3//n6/X/+T//6n+X6/9/Y5+396e94///P9X/+p/4/+fv//vX9n5b/P/q46P4/H645r9f+v6b9v9//8/vL/8f+/fWb/P6+f7+P9XfX89f/3/rXf/P6+fP/+X6v5/w44P/8X///4v///rW5///P///v///wAAACH5BAEAAC8ALAAAAAAJAAQAAAIRjAWZi7A7mEMSNqsqxYq/XAAAOw==">
+        </div>
         <div class="subtitle">課程收費方案 (適用任何課程)</div>
     </header>
 
     <nav class="tabs">
         <button class="tab-btn active" onclick="openTab(event, 'newbie')">新客限定</button>
         <button class="tab-btn" onclick="openTab(event, 'standard')">標準套票</button>
+        <button class="tab-btn" onclick="openTab(event, 'payment')">付款方法</button>
     </nav>
 
     <div id="newbie" class="content active">
-        <div class="price-card highlight-card">
+        <div class="price-card highlight-card promo-glow-card">
             <div class="promo-badge">限首次體驗客人</div>
             <h3>3堂體驗套票</h3>
             <div class="price-tag">$298</div>
@@ -187,49 +334,133 @@
             <div class="bonus-text">
                 🔥 如體驗結束即日購買任何套票，即減 $100!!
             </div>
+            <button class="pay-btn" onclick="openTab(null, 'payment')">立即預約付款</button>
+        </div>
+
+        <div class="price-card">
+            <div class="promo-badge">新手試玩</div>
+            <h3>單次體驗課</h3>
+            <div class="price-tag">$128 <span style="font-size: 1.1rem; color: #888;">/ 1堂</span></div>
+            <div class="info-row">適合只想試一堂的您</div>
+            <button class="pay-btn" onclick="openTab(null, 'payment')">立即預約付款</button>
         </div>
     </div>
 
     <div id="standard" class="content">
         <div class="price-card">
-            <h3>單次體驗課</h3>
-            <div class="price-tag">$128 <span style="font-size: 1rem;">/ 1堂</span></div>
+            <h3>單次課堂</h3>
+            <div class="price-tag">$180 <span style="font-size: 1.1rem; color: #888;">/ 1堂</span></div>
+            <div class="info-row">彈性上堂，無需綁定</div>
+            <button class="pay-btn" onclick="openTab(null, 'payment')">前往付款</button>
         </div>
 
         <div class="price-card">
             <h3>五堂運動套票</h3>
-            <div class="price-tag">$750 <span style="font-size: 1rem;">/ 5堂</span></div>
+            <div class="price-tag">$750 <span style="font-size: 1.1rem; color: #888;">/ 5堂</span></div>
             <div class="info-row">平均每堂：$150</div>
             <div class="info-row">有效期限：45日內</div>
+            <button class="pay-btn" onclick="openTab(null, 'payment')">前往付款</button>
         </div>
 
         <div class="price-card highlight-card">
             <div class="promo-badge">最划算推薦</div>
             <h3>10堂運動套票</h3>
-            <div class="price-tag">$1200 <span style="font-size: 1rem;">/ 10堂</span></div>
+            <div class="price-tag">$1200 <span style="font-size: 1.1rem; color: #888;">/ 10堂</span></div>
             <div class="info-row">平均每堂：$120</div>
             <div class="info-row">有效期限：3個月內</div>
+            <button class="pay-btn" onclick="openTab(null, 'payment')">前往付款</button>
         </div>
     </div>
 
+    <div id="payment" class="content">
+        
+        <div class="map-section">
+            <div class="payment-info-title">公司地址</div>
+            <p class="address-text">荃灣德士古道寶業工業大廈A座，11樓4B室</p>
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://maps.app.goo.gl/y3eLpGX1YGUdiYEt8?g_st=ic然後我想你幫我把地址開另一分頁清楚出示，而另一分頁是課堂時間表（圖１），直接幫我轉成" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+                </div>
+        </div>
+
+        <div class="payment-method-card promo-glow-card">
+            <div class="payment-info-title">預約與付款流程</div>
+            <p class="payment-detail">1. 選擇您的課程方案。</p>
+            <p class="payment-detail">2. 使用以下任一方法付款。</p>
+            <p class="payment-detail">3. **付款後，請務必將付款截圖轉至 WhatsApp 登記。**</p>
+        </div>
+
+        <div class="payment-method-card">
+            <div class="payment-info-title">方法一：恒生銀行轉帳</div>
+            <p class="payment-detail">戶口號碼: <strong>288-291909-668</strong></p>
+            <p class="payment-detail">戶口姓名: Pui lxx txxx</p>
+        </div>
+
+        <div class="payment-method-card">
+            <div class="payment-info-title">方法二：PayMe</div>
+            <p class="payment-detail">點擊下方按鈕或掃描二維碼付款：</p>
+            <a href="https://payme.hsbc/fitnesshermary" class="external-btn payme-btn" target="_blank">使用 PayMe 付款</a>
+        </div>
+
+        <div class="payment-method-card">
+            <div class="payment-info-title">方法三：轉數快 (FPS)</div>
+            <p class="payment-detail">登記電話: <strong>98198672</strong></p>
+        </div>
+
+        <div class="price-card highlight-card" style="text-align: center; margin-top: 30px;">
+            <div class="payment-info-title" style="color: #ffd700;">付款後請注意</div>
+            <p class="payment-detail">如付款後請轉至 WhatsApp 出示截圖以確認預約：</p>
+            <a href="https://wa.me/85298198672?text=我已付款，這是我的截圖。" class="external-btn whatsapp-btn" target="_blank">
+                📱 WhatsApp 出示截圖
+            </a>
+            <p class="payment-detail" style="font-size: 0.8rem; margin-top: 10px;">(WhatsApp 電話: 98198672)</p>
+        </div>
+
+    </div>
+
     <footer>
-        Follow us on Instagram: <a href="https://instagram.com/fitnesshero_quby" class="ig-link">@fitnesshero_quby</a>
+        預約課堂請去到 <a href="https://instagram.com/fitnesshero_quby" class="ig-link" target="_blank">ig inbox 私信</a>。<br>
+        Follow us on Instagram: <a href="https://instagram.com/fitnesshero_quby" class="ig-link" target="_blank">@fitnesshero_quby</a>
     </footer>
 </div>
 
 <script>
     function openTab(evt, tabName) {
         var i, content, tabLinks;
+        
+        // 隱藏所有內容
         content = document.getElementsByClassName("content");
         for (i = 0; i < content.length; i++) {
             content[i].classList.remove("active");
         }
+        
+        // 取消所有分頁按鈕的活動狀態
         tabLinks = document.getElementsByClassName("tab-btn");
         for (i = 0; i < tabLinks.length; i++) {
             tabLinks[i].classList.remove("active");
         }
+        
+        // 顯示當前分頁內容
         document.getElementById(tabName).classList.add("active");
-        evt.currentTarget.classList.add("active");
+        
+        // 將點擊的按鈕設為活動狀態（如果 evt 存在）
+        if (evt) {
+            evt.currentTarget.classList.add("active");
+        } else {
+            // 如果是通過代碼調用（例如卡片內的付款按鈕），則將相應的分頁導航按鈕設為 active
+            for (i = 0; i < tabLinks.length; i++) {
+                if (tabLinks[i].getAttribute('onclick').includes(tabName)) {
+                    tabLinks[i].classList.add("active");
+                    break;
+                }
+            }
+        }
+        
+        // 滾動到頁面頂部
+        window.scrollTo(0, 0);
     }
 </script>
 
